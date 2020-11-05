@@ -70,19 +70,19 @@ public class Helix {
         float averagePa = 0, averagePb = 0;
         for(int i=0;i<helixRegion.size()-6;i++){
             countAa = 0;
-            //elegxos parathurou gia ta kataloipa pou anhkoun se elika
+            //check window for aa that belogs to helix
             for(int j=i;j<i+window;j++){
                 if(helixRegion.get(j).pa > 100){
                     countAa++;
                 }
             }
             if(countAa >= 4){
-                //ekxwrhsh perioxhs ws elika an panw apo 4 exoun pa > 100
+                //If more than 4aa have pa > 100 then is helix
                 for(int j=i;j<i+window;j++){
                     helixRegion.get(j).isHelix = 'H';
                 }
-                startWin = i; //arxh gia extendLeft
-                endWin = i+window-1; //telos gia extendRight
+                startWin = i; 
+                endWin = i+window-1; //end of extendRight
                 //Extend Left
                 if(startWin - 1 > 0 && helixRegion.get(startWin-1).isHelix == '-'){
                     averagePa = 0; averagePb = 0; countL = 0; 
@@ -95,7 +95,7 @@ public class Helix {
                         }
                         averagePa = averagePa/retLeft;
                         averagePb = averagePb/retLeft;
-                        //elegxos an to extend anhkei se elika 
+                        //check if extend belongs to helix
                         if(averagePa > averagePb){
                             for(int k = i-1;k >= i-retLeft;k--){
                                 helixRegion.get(k).isHelix = 'H';
@@ -105,7 +105,7 @@ public class Helix {
                                 helixRegion.get(k).isHelix = '-';
                             }
                         }
-                        //an to extend einai mexri 5 kataloipa einai elika 
+                        //if extend <= 5aa then belongs to helix
                     }else if(retLeft <= 5){
                         for(int k = i-1;k >= i-retLeft;k--){
                             helixRegion.get(k).isHelix = 'H';
