@@ -46,11 +46,11 @@ public class ResidueParam {
     }
     
     public List<ResidueParam> readParametersFile(){
-        //diavazei tis parametrous apo to arxeio param.txt
-        //apothikeush parametrou se lista tupou ResidueParam
+        
+        
         List<ResidueParam> res = new ArrayList<ResidueParam>();
         List<ResidueParam> helix = new ArrayList<ResidueParam>();
-        File input = new File("param.txt");
+        File input = new File("param.txt"); //read parameters from param.txt
         
         try(BufferedReader br = new BufferedReader(new FileReader(input))){
             String line = null;
