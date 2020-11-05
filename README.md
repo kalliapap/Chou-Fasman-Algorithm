@@ -6,4 +6,4 @@ A fasta-format file with the amino acid sequence. If input file is not in fasta-
 (example file: 1a00.txt)
 
 ## Output
-The result is saved in the choufasman.txt file.
+The result is saved in the choufasman.txt file. Results are also shown in the figure diagram (choufasman.png).
