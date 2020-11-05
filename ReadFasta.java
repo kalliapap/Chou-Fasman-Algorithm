@@ -28,8 +28,7 @@ public class ReadFasta {
         readFastaFile(file);
         return sequence;
     }
-    //diavazei to arxeio se morfh fasta an den einai se fasta format termatizei 
-    //me mhnuma sto xrhsth
+    
     private void readFastaFile(File fastaFile) {
         InputStream fasta;
         String line;
@@ -46,14 +45,14 @@ public class ReadFasta {
                 }
                 if(line.startsWith(">", 0)){
                     if (lineNb == 0) {
-                        this.header = line; //apothikeush header
+                        this.header = line; //save header
                     }
                 }else{
                     sb.append(line);
                 }
                 lineNb++;
             }
-            this.sequence = sb.toString(); //apothikeush akolouthias
+            this.sequence = sb.toString(); //save sequence
             buff.close();
         }
         catch(Exception e) {
