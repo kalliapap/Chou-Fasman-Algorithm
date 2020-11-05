@@ -27,7 +27,6 @@ public class Turn extends ResidueParam {
     }
     
     public void initTurnList(String sequence,List<ResidueParam> resParamList){
-        //dhmiourgia listas me aparaithta pedia gia euresh strofwn
         for(int i=0;i<sequence.length();i++){
             Turn t = new Turn();
             t.amino = sequence.charAt(i);
@@ -56,7 +55,7 @@ public class Turn extends ResidueParam {
     }
     
     public List<Turn> findTurnRegions(){
-        //elegxos sunthikwn gia na uparxei strofh
+        //checks for turn existance
         for(int i=0;i<turnRegion.size()-3;i++){
             double pt,averagePt = 0,averagePa = 0,averagePb = 0;
             pt = turnRegion.get(i).getFi()*turnRegion.get(i+1).getFi1()*
@@ -78,7 +77,7 @@ public class Turn extends ResidueParam {
         }
         return turnRegion;
     }
-     //sunarthsh pou kanei ton elegxo twn sunthikwn kai epistrefei 0 h 1 analoga
+    
     public boolean checkConditions(double pt,double avPt,double avPa,double avPb){
         boolean flag = false;
         if(pt > 0.000075 && avPt > 100 && avPa < avPt && avPt > avPb )
