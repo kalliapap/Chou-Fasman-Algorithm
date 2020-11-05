@@ -64,14 +64,14 @@ public class BetaSheet {
        int startWin, endWin, retLeft, retRight;
        for(int i = 0;i<betaRegion.size() - 4;i++){
             countAa = 0;
-            //elegxos parathurou 5aa gia pb>100
+            //check window, 5aa for pb>100
             for(int j=i;j<i+window;j++){
                 if(betaRegion.get(j).pb > 100){
                     countAa++;
                 }
             }
             if(countAa >= 3){
-                //an vrethoun 3 orismos parathurou ws beta
+                //if 3 then is beta
                 for(int j=i;j<i+window;j++){
                     betaRegion.get(j).isBeta = 'E';
                 }
@@ -81,14 +81,14 @@ public class BetaSheet {
                 if(startWin - 1 > 0){
                     countL = 0; averagePa = 0; averagePb = 0;
                     retLeft = extendLeft(startWin);
-                    //average timh twn kataloipwn pou egine extend
+                    //average value of residues that extended
                     for(int j = i-1;j >= i-retLeft;j--){
                         averagePa += betaRegion.get(j).pa;
                         averagePb += betaRegion.get(j).pb;
                     }
                     averagePa = averagePa / retLeft;
                     averagePb = averagePb / retLeft;
-                    //elegxos an h epektash anhkei se beta sheet
+                    //check if extension belongs to beta sheet
                     if(averagePb > 105 && averagePb > averagePa){
                         for(int j = i-1;j >= i-retLeft;j--){
                             betaRegion.get(j).isBeta = 'E';
@@ -110,7 +110,7 @@ public class BetaSheet {
                     }
                     averagePa = averagePa / retRight;
                     averagePb = averagePb / retRight;
-                    //elegxos an einai beta h epektash
+                    //check if beta or extend
                     if(averagePb > 105 && averagePb > averagePa){
                         for(int j = endWin+1;j <= endWin+retRight;j++){
                             betaRegion.get(j).isBeta = 'E'; 
@@ -132,7 +132,7 @@ public class BetaSheet {
         if(betaRegion.get(startWin - 1).isBeta == '-'){
             float average = (betaRegion.get(startWin-1).pb + betaRegion.get(startWin).pb 
                     +betaRegion.get(startWin+1).pb + betaRegion.get(startWin+2).pb)/4;
-            //an isxuei sunexizei thn epektash pros ta aristera 
+            //if true continue left
             if(average >= 100){
                 startWin--;
                 countL++;
@@ -142,7 +142,7 @@ public class BetaSheet {
                     return countL;
             }
         }
-        //epistrefei ton sunoliko arithmo kataloipwn pou egine epektash
+        
         return countL;
     }
     
