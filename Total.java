@@ -20,7 +20,7 @@ public class Total {
     private char consensus;
     
     public List<Total> totalList(List<Helix> helix,List<BetaSheet> beta,List<Turn> turn){
-        //dhmiourgia listas me ola ta aparaithta pedia gia ton upologismo ths consensus allhlouxias
+        //create list with all the fields needed for consensus sequence
         List<Total> total = new ArrayList<Total>();
         for(int i = 0;i < helix.size();i++){
             Total t = new Total();
@@ -44,7 +44,7 @@ public class Total {
         for(int i=0;i<total.size();i++){
             averagePa = 0;
             averagePb = 0;
-            //perioxes allhloepikalupshs
+            //overlapping areas
             if(total.get(i).helix == 'H' && total.get(i).beta == 'E'){
                 start = i;
                 while(total.get(i).helix == 'H' && total.get(i).beta == 'E'){
@@ -52,14 +52,14 @@ public class Total {
                 }
                 i--;
                 end = i;
-                //euresh meswn orwn
+                //find average
                 for(int j = start;j<=end;j++){
                     averagePa += total.get(j).pa;
                     averagePb += total.get(j).pb;    
                 }
                 averagePa = averagePa /(end - start+1);
                 averagePb = averagePb /(end - start+1);
-                //elegxos an h uperisxuei h elika h beta sheet 
+                //check if prevails helix or beta sheet
                 if(averagePa > averagePb){
                     for(int j = start;j<=end;j++){
                         total.get(j).consensus = 'H';
@@ -70,7 +70,7 @@ public class Total {
                     }  
                 }
             }
-            //perioxes pou periexoun mono elikes h beta sheet 
+            //areas that contain only helices or beta sheet 
             if(total.get(i).helix == 'H' && total.get(i).beta != 'E'){
                 total.get(i).consensus = 'H';   
             }
@@ -78,7 +78,7 @@ public class Total {
                 total.get(i).consensus = 'E';    
             }       
         }  
-        //ekxwrhsh strofwn
+        //turns
         for(int i=0;i<total.size();i++){
             if(total.get(i).turn == 'T'){
                 total.get(i).consensus = 'T';  
